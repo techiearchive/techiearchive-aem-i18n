@@ -61,6 +61,7 @@ public class Samplei18nModel {
   
   @PostConstruct
   protected void init() {
+    LOGGER.debug("Inside init method.");
     Resource resource = slingRequest.getResource();
     title = geti18NLabel(TITLE_18NKEY, resource);
     desc = geti18NLabel(TITLE_18NKEY, resource);
