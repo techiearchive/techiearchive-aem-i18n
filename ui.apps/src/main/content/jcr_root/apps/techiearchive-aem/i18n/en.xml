@@ -10,7 +10,7 @@
     <desc
         jcr:primaryType="sling:MessageEntry"
         sling:key="techiearchive-aem.desc"
-        sling:message="This i18n example"/>
+        sling:message="This is an i18n example"/>
     <helpMessage
         jcr:primaryType="sling:MessageEntry"
         sling:key="techiearchive-aem.helpMessage"
