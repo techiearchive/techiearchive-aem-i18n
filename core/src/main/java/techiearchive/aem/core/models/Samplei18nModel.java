@@ -1,7 +1,5 @@
 package techiearchive.aem.core.models;
 
-import java.util.Base64;
-
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -15,15 +13,11 @@ import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.ExporterOption;
 import org.apache.sling.models.annotations.Filter;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.Self;
-import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.adobe.granite.crypto.CryptoSupport;
 import com.day.cq.tagging.Tag;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
