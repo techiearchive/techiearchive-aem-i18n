@@ -2,9 +2,11 @@ package techiearchive.aem.core.models;
 
 import java.util.Objects;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import com.adobe.granite.i18n.LocaleUtil;
 import com.day.cq.wcm.api.PageManager;
 import com.day.cq.wcm.api.Page;
+import com.day.cq.commons.jcr.JcrConstants;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -92,6 +94,17 @@ public class Samplei18nModel {
         }
         return localeMessage;
     }
+       
+   public static String getLocale(Resource resource) {
+        String locale = null;
+        if (Objects.nonNull(resource)) {
+            String[] nodes = resource.getPath().split("/");
+            String countryCode = nodes[3];
+            String languageCode = nodes[4];
+            locale = languageCode + "_" + countryCode;
+        }
+        return locale;
+    }     
         
    private static String getLocaleFromSiteRoot(Resource resource) {
         String siteLocale = null;
