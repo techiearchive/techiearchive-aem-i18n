@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory;
 import com.day.cq.tagging.Tag;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import lombok.Getter;
 
@@ -70,10 +72,39 @@ public class Samplei18nModel {
   }
   
   private String geti18NLabel(String key, Resource resource) {
-        String label = CommonUtil.getLocaleMessage(resource, i18nProvider,
+        String label = getLocaleMessage(resource, i18nProvider,
                 TECHIEARCHIVE_AEM_I18NKEY + "." + key);
         return label;
     }
+     
+  private static String getLocaleMessage(Resource resource, ResourceBundleProvider i18nProvider, String messageKey) {
+        String localeMessage = null;
+        if (Objects.nonNull(resource) && Objects.nonNull(i18nProvider)) {
+            String locale = getLocaleFromSiteRoot(resource);
+            locale = StringUtils.isBlank(locale) ? getLocale(resource) : locale;
+            Locale currentLocale = LocaleUtil.parseLocale(locale);
+            ResourceBundle bundle = i18nProvider.getResourceBundle(currentLocale);
+            localeMessage = bundle.getString(messageKey);
+        }
+        return localeMessage;
+    }
+        
+   private static String getLocaleFromSiteRoot(Resource resource) {
+        String siteLocale = null;
+        if (Objects.nonNull(resource)) {
+            String pathInfo = resource.getPath();
+            Integer urlLangIndex = StringUtils.ordinalIndexOf(pathInfo, "/", 5);
+            String langPagePath = pathInfo.substring(0, urlLangIndex);
+            PageManager pageManager = resource.getResourceResolver().adaptTo(PageManager.class);
+            if (Objects.nonNull(pageManager)) {
+                Page langPage = pageManager.getPage(langPagePath);
+                if (Objects.nonNull(langPage)) {
+                    siteLocale = langPage.getProperties().get(PageConstant.JCR_LANGUAGE, String.class);
+                }
+            }
+        }
+        return siteLocale;
+    }     
   
    private void createAttributesJson() {
         LOGGER.debug("Inside createAttributesJson method.");
@@ -81,7 +112,15 @@ public class Samplei18nModel {
         attributeJsonMap.addProperty(TITLE_18NKEY, title);
         attributeJsonMap.addProperty(DESC_LABEL_18NKEY, desc);
         attributeJsonMap.addProperty(HELP_MESSAGE_LABEL_18NKEY, helpMessage);
-        attributesJson = JsonConvertor.convertToJson(attributeJsonMap);
+        attributesJson = convertToJson(attributeJsonMap);
         LOGGER.debug("attributesJson created '{}'", attributesJson);
     }
+   
+   /**
+   * convert object to json.
+   */
+   private static <T> String convertToJson(final T object) {
+        Gson gson;
+        return new GsonBuilder().setPrettyPrinting().create().toJson(object);
+   }     
 }
