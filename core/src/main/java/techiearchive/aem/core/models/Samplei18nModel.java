@@ -1,5 +1,10 @@
 package techiearchive.aem.core.models;
 
+import java.util.Objects;
+import java.util.Locale;
+import com.adobe.granite.i18n.LocaleUtil;
+import com.day.cq.wcm.api.PageManager;
+import com.day.cq.wcm.api.Page;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -72,7 +77,7 @@ public class Samplei18nModel {
   }
   
   private String geti18NLabel(String key, Resource resource) {
-        String label = getLocaleMessage(resource, i18nProvider,
+        String label = getLocaleMessage(resource, i18nProvider,\
                 TECHIEARCHIVE_AEM_I18NKEY + "." + key);
         return label;
     }
@@ -99,7 +104,7 @@ public class Samplei18nModel {
             if (Objects.nonNull(pageManager)) {
                 Page langPage = pageManager.getPage(langPagePath);
                 if (Objects.nonNull(langPage)) {
-                    siteLocale = langPage.getProperties().get(PageConstant.JCR_LANGUAGE, String.class);
+                    siteLocale = langPage.getProperties().get(JcrConstants.JCR_LANGUAGE, String.class);
                 }
             }
         }
