@@ -77,8 +77,7 @@ public class Samplei18nModel {
   }
   
   private String geti18NLabel(String key, Resource resource) {
-        String label = getLocaleMessage(resource, i18nProvider,\
-                TECHIEARCHIVE_AEM_I18NKEY + "." + key);
+        String label = getLocaleMessage(resource, i18nProvider, TECHIEARCHIVE_AEM_I18NKEY + "." + key);
         return label;
     }
      
