@@ -70,10 +70,6 @@ Maven command to create new project with archetype version 13
 Maven command to create new project with archetype version 23
 	
 	mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeGroupId=com.adobe.granite.archetypes -DarchetypeArtifactId=aem-project-archetype -DarchetypeVersion=23 -DarchetypeCatalog=https://repo.adobe.com/nexus/content/groups/public/
-	
-Maven command to create new project with archetype version 23 and with aem version and project details
-	
-	mvn -B archetype:generate -D archetypeGroupId=com.adobe.aem -D archetypeArtifactId=aem-project-archetype -D archetypeVersion=23 -D appTitle="Techie Site" -D appId="techiesite" -D groupId="com.techiesite" -D aemVersion=6.5.4
 
 Add new repository into github
 
